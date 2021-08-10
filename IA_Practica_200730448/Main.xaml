@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" sap2010:ExpressionActivityEditor.ExpressionActivityEditor="C#" sap:VirtualizedContainerService.HintSize="1419,3645" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities" xmlns:p="http://schemas.microsoft.com/workflow/2012/07/xaml/activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.Collections;assembly=mscorlib" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" sap2010:ExpressionActivityEditor.ExpressionActivityEditor="C#" sap:VirtualizedContainerService.HintSize="1795,6779" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities" xmlns:p="http://schemas.microsoft.com/workflow/2012/07/xaml/activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.Collections;assembly=mscorlib" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -30,6 +30,16 @@
       <x:String>System.Reflection</x:String>
       <x:String>System.Runtime.InteropServices</x:String>
       <x:String>Microsoft.Activities.Expressions</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Activities.Contracts</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.Mail</x:String>
+      <x:String>UiPath.Mail.SMTP.Activities</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -70,7 +80,13 @@
       <AssemblyReference>UiPath.PDF.Activities</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
       <AssemblyReference>Microsoft.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>DocumentFormat.OpenXml</AssemblyReference>
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+      <AssemblyReference>UiPath.Activities.Contracts</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities.Design</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <sap:WorkflowViewStateService.ViewState>
@@ -79,11 +95,19 @@
       <x:Boolean x:Key="ShouldCollapseAll">True</x:Boolean>
     </scg:Dictionary>
   </sap:WorkflowViewStateService.ViewState>
-  <Sequence DisplayName="Secuencia" sap:VirtualizedContainerService.HintSize="1429,3480" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Practica1" sap:VirtualizedContainerService.HintSize="1805,6614" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="pmRutaPDF" />
       <Variable x:TypeArguments="x:String" Name="textoPDF" />
       <Variable x:TypeArguments="x:Boolean" Name="PmRutaExiste" />
+      <Variable x:TypeArguments="x:Int32" Default="0" Name="archivosMovidos" />
+      <Variable x:TypeArguments="x:Int32" Name="celdaEscribir">
+        <Variable.Default>
+          <Literal x:TypeArguments="x:Int32" Value="6" />
+        </Variable.Default>
+      </Variable>
+      <Variable x:TypeArguments="s:DateTime" Name="HoraInicio" />
+      <Variable x:TypeArguments="s:DateTime" Name="HoraFin" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -91,7 +115,7 @@
         <x:Boolean x:Key="IsPinned">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:CommentOut DisplayName="Comentar" sap:VirtualizedContainerService.HintSize="1387,51" sap2010:WorkflowViewState.IdRef="CommentOut_5">
+    <ui:CommentOut DisplayName="Comentar" sap:VirtualizedContainerService.HintSize="1763,51" sap2010:WorkflowViewState.IdRef="CommentOut_5">
       <ui:CommentOut.Body>
         <Sequence DisplayName="Actividades ignoradas" sap2010:WorkflowViewState.IdRef="Sequence_9">
           <ui:InputDialog Options="{x:Null}" OptionsString="{x:Null}" DisplayName="Cuadro de diálogo de entrada" sap:VirtualizedContainerService.HintSize="1078,51" sap2010:WorkflowViewState.IdRef="InputDialog_1" IsPassword="False" Label="Ingrese ruta de documento PDF" Title="Practica 1 - Inteligencia Artificial">
@@ -110,7 +134,7 @@
         </Sequence>
       </ui:CommentOut.Body>
     </ui:CommentOut>
-    <Assign DisplayName="Asignar" sap:VirtualizedContainerService.HintSize="1387,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+    <Assign DisplayName="Asignar" sap:VirtualizedContainerService.HintSize="1763,60" sap2010:WorkflowViewState.IdRef="Assign_4">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">
           <mca:CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_13">pmRutaPDF</mca:CSharpReference>
@@ -120,7 +144,19 @@
         <InArgument x:TypeArguments="x:String">E:\USAC\Segundo Semestre 2021\Inteligencia Artificial 1\Laboratorio\Practica 1\entrada.pdf</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:PathExists DisplayName="Ruta existente" sap:VirtualizedContainerService.HintSize="1387,51" sap2010:WorkflowViewState.IdRef="PathExists_2" PathType="File">
+    <Assign DisplayName="Asignar" sap:VirtualizedContainerService.HintSize="1763,60" sap2010:WorkflowViewState.IdRef="Assign_18">
+      <Assign.To>
+        <OutArgument x:TypeArguments="s:DateTime">
+          <mca:CSharpReference x:TypeArguments="s:DateTime" sap2010:WorkflowViewState.IdRef="CSharpReference`1_36">HoraInicio</mca:CSharpReference>
+        </OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="s:DateTime">
+          <mca:CSharpValue x:TypeArguments="s:DateTime" sap2010:WorkflowViewState.IdRef="CSharpValue`1_135">DateTime.Now</mca:CSharpValue>
+        </InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:PathExists DisplayName="Ruta existente" sap:VirtualizedContainerService.HintSize="1763,89" sap2010:WorkflowViewState.IdRef="PathExists_2" PathType="File">
       <ui:PathExists.Exists>
         <OutArgument x:TypeArguments="x:Boolean">
           <mca:CSharpReference x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpReference`1_3">PmRutaExiste</mca:CSharpReference>
@@ -131,8 +167,13 @@
           <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_5">pmRutaPDF</mca:CSharpValue>
         </InArgument>
       </ui:PathExists.Path>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsPinned">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
     </ui:PathExists>
-    <If DisplayName="Si" sap:VirtualizedContainerService.HintSize="1387,3106" sap2010:WorkflowViewState.IdRef="If_1">
+    <If DisplayName="Si" sap:VirtualizedContainerService.HintSize="1763,6102" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Condition>
         <InArgument x:TypeArguments="x:Boolean">
           <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_6">PmRutaExiste</mca:CSharpValue>
@@ -144,12 +185,15 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <Sequence DisplayName="Secuencia" sap:VirtualizedContainerService.HintSize="1142,2948" sap2010:WorkflowViewState.IdRef="Sequence_3">
+        <Sequence DisplayName="LeerPDF" sap:VirtualizedContainerService.HintSize="1518,5944" sap2010:WorkflowViewState.IdRef="Sequence_3">
           <Sequence.Variables>
             <Variable x:TypeArguments="s:String[]" Name="salida" />
             <Variable x:TypeArguments="s:String[]" Name="listadoPDF" />
             <Variable x:TypeArguments="s:String[]" Name="listadoRutas" />
             <Variable x:TypeArguments="s:String[]" Name="listadoExtensiones" />
+            <Variable x:TypeArguments="x:String" Name="pwd" />
+            <Variable x:TypeArguments="x:String" Name="cuerpoCorreo" />
+            <Variable x:TypeArguments="x:Int32" Name="segundos" />
           </Sequence.Variables>
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -157,7 +201,113 @@
               <x:Boolean x:Key="IsPinned">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:ReadPDFText PreserveFormatting="{x:Null}" DisplayName="Leer texto en PDF" sap:VirtualizedContainerService.HintSize="944,59" sap2010:WorkflowViewState.IdRef="ReadPDFText_1" Range="All">
+          <ui:CommentOut DisplayName="Comentar" sap:VirtualizedContainerService.HintSize="1476,51" sap2010:WorkflowViewState.IdRef="CommentOut_15">
+            <ui:CommentOut.Body>
+              <Sequence DisplayName="Actividades ignoradas" sap2010:WorkflowViewState.IdRef="Sequence_39">
+                <ui:Delete ContinueOnError="{x:Null}" DisplayName="Eliminar" sap:VirtualizedContainerService.HintSize="1476,79" sap2010:WorkflowViewState.IdRef="Delete_1" Path="reporte_200730448.xlxs">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ui:Delete>
+              </Sequence>
+            </ui:CommentOut.Body>
+          </ui:CommentOut>
+          <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Ámbito de aplicación de Excel" sap:VirtualizedContainerService.HintSize="1476,1471" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" InstanceCachePeriod="3000" WorkbookPath="reporte_200730448">
+            <ui:ExcelApplicationScope.Body>
+              <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Hacer" sap:VirtualizedContainerService.HintSize="376,1322" sap2010:WorkflowViewState.IdRef="Sequence_27">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:ExcelWriteCell Cell="A1" DisplayName="Escribir celda" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_1" SheetName="Bitacora" Text="Inteligecia Artificial">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:ExcelWriteCell>
+                  <ui:ExcelWriteCell Cell="A2" DisplayName="Escribir celda" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_2" SheetName="Bitacora" Text="José Alberto Velásquez Orozco">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:ExcelWriteCell>
+                  <ui:ExcelWriteCell Cell="A3" DisplayName="Escribir celda" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_3" SheetName="Bitacora" Text="Carné: 200730448">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:ExcelWriteCell>
+                  <ui:ExcelWriteCell Cell="A5" DisplayName="Escribir celda" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_4" SheetName="Bitacora" Text="Bitacora">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:ExcelWriteCell>
+                  <ui:ExcelWriteCell Cell="A1" DisplayName="Escribir celda" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_15" SheetName="Archivos" Text="Nombre">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:ExcelWriteCell>
+                  <ui:ExcelWriteCell Cell="B1" DisplayName="Escribir celda" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_16" SheetName="Archivos" Text="Tamaño">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:ExcelWriteCell>
+                  <ui:ExcelWriteCell Cell="C1" DisplayName="Escribir celda" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_17" SheetName="Archivos" Text="Ubicación">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:ExcelWriteCell>
+                  <ui:ExcelWriteCell Cell="D1" DisplayName="Escribir celda" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_18" SheetName="Archivos" Text="Fecha Creación">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:ExcelWriteCell>
+                  <ui:ExcelWriteCell Cell="E1" DisplayName="Escribir celda" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_19" SheetName="Archivos" Text="Modificado por última vez">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:ExcelWriteCell>
+                  <ui:ExcelWriteCell Cell="F1" DisplayName="Escribir celda" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_20" SheetName="Archivos" Text="Tipo">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:ExcelWriteCell>
+                </Sequence>
+              </ActivityAction>
+            </ui:ExcelApplicationScope.Body>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:ExcelApplicationScope>
+          <ui:ReadPDFText PreserveFormatting="{x:Null}" DisplayName="Leer texto en PDF" sap:VirtualizedContainerService.HintSize="1476,51" sap2010:WorkflowViewState.IdRef="ReadPDFText_1" Range="All">
             <ui:ReadPDFText.FileName>
               <InArgument x:TypeArguments="x:String">
                 <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_3">pmRutaPDF</mca:CSharpValue>
@@ -170,11 +320,11 @@
             </ui:ReadPDFText.Text>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:ReadPDFText>
-          <p:SplitString DisplayName="Split string" sap:VirtualizedContainerService.HintSize="944,51" sap2010:WorkflowViewState.IdRef="SplitString_1" Separator=";" StringSplitOptions="None">
+          <p:SplitString DisplayName="Split string" sap:VirtualizedContainerService.HintSize="1476,51" sap2010:WorkflowViewState.IdRef="SplitString_1" Separator=";" StringSplitOptions="None">
             <p:SplitString.Input>
               <InArgument x:TypeArguments="x:String">
                 <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_9">textoPDF</mca:CSharpValue>
@@ -186,7 +336,7 @@
               </OutArgument>
             </p:SplitString.Result>
           </p:SplitString>
-          <p:SplitString DisplayName="Split string" sap:VirtualizedContainerService.HintSize="1100,51" sap2010:WorkflowViewState.IdRef="SplitString_2" Separator="," StringSplitOptions="None">
+          <p:SplitString DisplayName="Split string" sap:VirtualizedContainerService.HintSize="1476,51" sap2010:WorkflowViewState.IdRef="SplitString_2" Separator="," StringSplitOptions="None">
             <p:SplitString.Input>
               <InArgument x:TypeArguments="x:String">
                 <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_23">listadoPDF[0].ToString()</mca:CSharpValue>
@@ -204,7 +354,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </p:SplitString>
-          <p:SplitString DisplayName="Split string" sap:VirtualizedContainerService.HintSize="1100,51" sap2010:WorkflowViewState.IdRef="SplitString_3" Separator="," StringSplitOptions="None">
+          <p:SplitString DisplayName="Split string" sap:VirtualizedContainerService.HintSize="1476,51" sap2010:WorkflowViewState.IdRef="SplitString_3" Separator="," StringSplitOptions="None">
             <p:SplitString.Input>
               <InArgument x:TypeArguments="x:String">
                 <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_24">listadoPDF[1].ToString()</mca:CSharpValue>
@@ -222,13 +372,13 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </p:SplitString>
-          <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="Para cada" sap:VirtualizedContainerService.HintSize="1100,2393" sap2010:WorkflowViewState.IdRef="ForEach`1_1">
+          <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="Para cada" sap:VirtualizedContainerService.HintSize="1476,3236" sap2010:WorkflowViewState.IdRef="ForEach`1_1">
             <ui:ForEach.Body>
               <ActivityAction x:TypeArguments="x:Object">
                 <ActivityAction.Argument>
                   <DelegateInArgument x:TypeArguments="x:Object" Name="ruta" />
                 </ActivityAction.Argument>
-                <Sequence DisplayName="Cuerpo" sap:VirtualizedContainerService.HintSize="1156,2843" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                <Sequence DisplayName="Cuerpo" sap:VirtualizedContainerService.HintSize="1440,3102" sap2010:WorkflowViewState.IdRef="Sequence_4">
                   <Sequence.Variables>
                     <Variable x:TypeArguments="x:Boolean" Name="carpetaExiste" />
                   </Sequence.Variables>
@@ -238,7 +388,7 @@
                       <x:Boolean x:Key="IsPinned">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:PathExists DisplayName="Ruta existente" sap:VirtualizedContainerService.HintSize="1114,89" sap2010:WorkflowViewState.IdRef="PathExists_3" PathType="Folder">
+                  <ui:PathExists DisplayName="Ruta existente" sap:VirtualizedContainerService.HintSize="1398,89" sap2010:WorkflowViewState.IdRef="PathExists_3" PathType="Folder">
                     <ui:PathExists.Exists>
                       <OutArgument x:TypeArguments="x:Boolean">
                         <mca:CSharpReference x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpReference`1_12">carpetaExiste</mca:CSharpReference>
@@ -252,10 +402,11 @@
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </ui:PathExists>
-                  <If DisplayName="Si" sap:VirtualizedContainerService.HintSize="1114,2622" sap2010:WorkflowViewState.IdRef="If_2">
+                  <If DisplayName="Si" sap:VirtualizedContainerService.HintSize="1398,2881" sap2010:WorkflowViewState.IdRef="If_2">
                     <If.Condition>
                       <InArgument x:TypeArguments="x:Boolean">
                         <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_25">carpetaExiste</mca:CSharpValue>
@@ -264,16 +415,13 @@
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                     <If.Then>
-                      <Sequence DisplayName="Secuencia" sap:VirtualizedContainerService.HintSize="869,2464" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                      <Sequence DisplayName="LeerArchivos" sap:VirtualizedContainerService.HintSize="919,2723" sap2010:WorkflowViewState.IdRef="Sequence_11">
                         <Sequence.Variables>
-                          <Variable x:TypeArguments="x:Int32" Name="contArchivosCarpeta">
-                            <Variable.Default>
-                              <Literal x:TypeArguments="x:Int32" />
-                            </Variable.Default>
-                          </Variable>
+                          <Variable x:TypeArguments="x:Int32" Default="0" Name="contArchivosCarpeta" />
                         </Sequence.Variables>
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -281,88 +429,84 @@
                             <x:Boolean x:Key="IsPinned">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <ui:CommentOut DisplayName="Comentar" sap:VirtualizedContainerService.HintSize="827,614" sap2010:WorkflowViewState.IdRef="CommentOut_11">
-                          <ui:CommentOut.Body>
-                            <Sequence DisplayName="Actividades ignoradas" sap:VirtualizedContainerService.HintSize="454,496" sap2010:WorkflowViewState.IdRef="Sequence_18">
-                              <sap:WorkflowViewStateService.ViewState>
-                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                  <x:Boolean x:Key="IsPinned">True</x:Boolean>
-                                </scg:Dictionary>
-                              </sap:WorkflowViewStateService.ViewState>
-                              <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="Para cada" sap:VirtualizedContainerService.HintSize="412,404" sap2010:WorkflowViewState.IdRef="ForEach`1_3">
-                                <ui:ForEach.Body>
-                                  <ActivityAction x:TypeArguments="x:Object">
-                                    <ActivityAction.Argument>
-                                      <DelegateInArgument x:TypeArguments="x:Object" Name="extension" />
-                                    </ActivityAction.Argument>
-                                    <Sequence DisplayName="Cuerpo" sap:VirtualizedContainerService.HintSize="376,271" sap2010:WorkflowViewState.IdRef="Sequence_15">
-                                      <Sequence.Variables>
-                                        <Variable x:TypeArguments="x:String" Name="nomNuevaCarpeta" />
-                                      </Sequence.Variables>
-                                      <sap:WorkflowViewStateService.ViewState>
-                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                          <x:Boolean x:Key="IsPinned">True</x:Boolean>
-                                        </scg:Dictionary>
-                                      </sap:WorkflowViewStateService.ViewState>
-                                      <Assign DisplayName="Asignar" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_6">
-                                        <Assign.To>
-                                          <OutArgument x:TypeArguments="x:String">
-                                            <mca:CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_15">nomNuevaCarpeta</mca:CSharpReference>
-                                          </OutArgument>
-                                        </Assign.To>
-                                        <Assign.Value>
-                                          <InArgument x:TypeArguments="x:String">
-                                            <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_49">(ruta.ToString() +"\\"+ extension).Trim().Replace("\r\n", "").Replace("\n", "").Replace("\r", "")</mca:CSharpValue>
-                                          </InArgument>
-                                        </Assign.Value>
-                                      </Assign>
-                                      <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Crear carpeta" sap:VirtualizedContainerService.HintSize="334,79" sap2010:WorkflowViewState.IdRef="CreateDirectory_1">
-                                        <ui:CreateDirectory.Path>
-                                          <InArgument x:TypeArguments="x:String">
-                                            <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_50">nomNuevaCarpeta</mca:CSharpValue>
-                                          </InArgument>
-                                        </ui:CreateDirectory.Path>
-                                        <sap:WorkflowViewStateService.ViewState>
-                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                            <x:Boolean x:Key="IsPinned">True</x:Boolean>
-                                          </scg:Dictionary>
-                                        </sap:WorkflowViewStateService.ViewState>
-                                      </ui:CreateDirectory>
-                                    </Sequence>
-                                  </ActivityAction>
-                                </ui:ForEach.Body>
-                                <ui:ForEach.Values>
-                                  <InArgument x:TypeArguments="sc:IEnumerable">
-                                    <mca:CSharpValue x:TypeArguments="sc:IEnumerable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_37">listadoExtensiones</mca:CSharpValue>
-                                  </InArgument>
-                                </ui:ForEach.Values>
+                        <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Bitacora IngresoCarpeta" sap:VirtualizedContainerService.HintSize="877,555" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_5" InstanceCachePeriod="3000" WorkbookPath="reporte_200730448">
+                          <ui:ExcelApplicationScope.Body>
+                            <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+                              <ActivityAction.Argument>
+                                <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+                              </ActivityAction.Argument>
+                              <Sequence DisplayName="Hacer" sap:VirtualizedContainerService.HintSize="376,406" sap2010:WorkflowViewState.IdRef="Sequence_32">
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                    <x:Boolean x:Key="IsPinned">True</x:Boolean>
                                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    <x:Boolean x:Key="IsPinned">True</x:Boolean>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
-                              </ui:ForEach>
-                            </Sequence>
-                          </ui:CommentOut.Body>
+                                <Assign DisplayName="Asignar" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_13">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:Int32">
+                                      <mca:CSharpReference x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="CSharpReference`1_30">celdaEscribir</mca:CSharpReference>
+                                    </OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:Int32">
+                                      <mca:CSharpValue x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="CSharpValue`1_104">celdaEscribir+1</mca:CSharpValue>
+                                    </InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                                <ui:ExcelWriteCell DisplayName="Escribir celda" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_7" SheetName="Bitacora">
+                                  <ui:ExcelWriteCell.Cell>
+                                    <InArgument x:TypeArguments="x:String">
+                                      <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_105">"A"+celdaEscribir.ToString()</mca:CSharpValue>
+                                    </InArgument>
+                                  </ui:ExcelWriteCell.Cell>
+                                  <ui:ExcelWriteCell.Text>
+                                    <InArgument x:TypeArguments="x:String">
+                                      <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_109">(celdaEscribir-6).ToString()</mca:CSharpValue>
+                                    </InArgument>
+                                  </ui:ExcelWriteCell.Text>
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                </ui:ExcelWriteCell>
+                                <ui:ExcelWriteCell DisplayName="Escribir celda" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_8" SheetName="Bitacora">
+                                  <ui:ExcelWriteCell.Cell>
+                                    <InArgument x:TypeArguments="x:String">
+                                      <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_107">"B"+celdaEscribir.ToString()</mca:CSharpValue>
+                                    </InArgument>
+                                  </ui:ExcelWriteCell.Cell>
+                                  <ui:ExcelWriteCell.Text>
+                                    <InArgument x:TypeArguments="x:String">
+                                      <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_130">"Se ingresó a carpeta \"" + ruta.ToString() + "\""</mca:CSharpValue>
+                                    </InArgument>
+                                  </ui:ExcelWriteCell.Text>
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                </ui:ExcelWriteCell>
+                              </Sequence>
+                            </ActivityAction>
+                          </ui:ExcelApplicationScope.Body>
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <x:Boolean x:Key="IsPinned">True</x:Boolean>
-                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                        </ui:CommentOut>
-                        <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="Para cada" sap:VirtualizedContainerService.HintSize="827,1460" sap2010:WorkflowViewState.IdRef="ForEach`1_2">
+                        </ui:ExcelApplicationScope>
+                        <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="Para cada" sap:VirtualizedContainerService.HintSize="877,1945" sap2010:WorkflowViewState.IdRef="ForEach`1_2">
                           <ui:ForEach.Body>
                             <ActivityAction x:TypeArguments="x:Object">
                               <ActivityAction.Argument>
                                 <DelegateInArgument x:TypeArguments="x:Object" Name="archivo" />
                               </ActivityAction.Argument>
-                              <Sequence DisplayName="Cuerpo" sap:VirtualizedContainerService.HintSize="791,1326" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                              <Sequence DisplayName="Cuerpo" sap:VirtualizedContainerService.HintSize="841,1811" sap2010:WorkflowViewState.IdRef="Sequence_10">
                                 <Sequence.Variables>
                                   <Variable x:TypeArguments="x:String" Name="extensionArchivo" />
+                                  <Variable x:TypeArguments="scg:List(x:Object)" Name="infoArchivos" />
                                 </Sequence.Variables>
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -370,7 +514,7 @@
                                     <x:Boolean x:Key="IsPinned">True</x:Boolean>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
-                                <Assign DisplayName="Asignar" sap:VirtualizedContainerService.HintSize="749,60" sap2010:WorkflowViewState.IdRef="Assign_5">
+                                <Assign DisplayName="Asignar" sap:VirtualizedContainerService.HintSize="799,60" sap2010:WorkflowViewState.IdRef="Assign_5">
                                   <Assign.To>
                                     <OutArgument x:TypeArguments="x:Int32">
                                       <mca:CSharpReference x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="CSharpReference`1_14">contArchivosCarpeta</mca:CSharpReference>
@@ -382,7 +526,7 @@
                                     </InArgument>
                                   </Assign.Value>
                                 </Assign>
-                                <Assign DisplayName="Asignar" sap:VirtualizedContainerService.HintSize="749,60" sap2010:WorkflowViewState.IdRef="Assign_7">
+                                <Assign DisplayName="Asignar" sap:VirtualizedContainerService.HintSize="799,60" sap2010:WorkflowViewState.IdRef="Assign_7">
                                   <Assign.To>
                                     <OutArgument x:TypeArguments="x:String">
                                       <mca:CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_18">extensionArchivo</mca:CSharpReference>
@@ -390,65 +534,24 @@
                                   </Assign.To>
                                   <Assign.Value>
                                     <InArgument x:TypeArguments="x:String">
-                                      <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_59">Path.GetExtension(archivo.ToString()).Replace(".","")</mca:CSharpValue>
+                                      <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_83">Path.GetExtension(archivo.ToString()).Replace(".","")</mca:CSharpValue>
                                     </InArgument>
                                   </Assign.Value>
                                 </Assign>
-                                <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="Para cada" sap:VirtualizedContainerService.HintSize="749,1034" sap2010:WorkflowViewState.IdRef="ForEach`1_4">
+                                <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="Para cada" sap:VirtualizedContainerService.HintSize="799,1519" sap2010:WorkflowViewState.IdRef="ForEach`1_4">
                                   <ui:ForEach.Body>
                                     <ActivityAction x:TypeArguments="x:Object">
                                       <ActivityAction.Argument>
                                         <DelegateInArgument x:TypeArguments="x:Object" Name="extension" />
                                       </ActivityAction.Argument>
-                                      <Sequence DisplayName="Cuerpo" sap:VirtualizedContainerService.HintSize="713,900" sap2010:WorkflowViewState.IdRef="Sequence_21">
+                                      <Sequence DisplayName="Cuerpo" sap:VirtualizedContainerService.HintSize="763,1385" sap2010:WorkflowViewState.IdRef="Sequence_21">
                                         <sap:WorkflowViewStateService.ViewState>
                                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                             <x:Boolean x:Key="IsPinned">True</x:Boolean>
                                           </scg:Dictionary>
                                         </sap:WorkflowViewStateService.ViewState>
-                                        <ui:CommentOut DisplayName="Comentar" sap:VirtualizedContainerService.HintSize="671,51" sap2010:WorkflowViewState.IdRef="CommentOut_14">
-                                          <ui:CommentOut.Body>
-                                            <Sequence DisplayName="Actividades ignoradas" sap2010:WorkflowViewState.IdRef="Sequence_23">
-                                              <ui:MultipleAssign DisplayName="Asignación múltiple" sap:VirtualizedContainerService.HintSize="755,129" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
-                                                <ui:MultipleAssign.AssignOperations>
-                                                  <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
-                                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
-                                                      <ui:AssignOperation.To>
-                                                        <OutArgument x:TypeArguments="x:Object">
-                                                          <mca:CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_19">extension</mca:CSharpReference>
-                                                        </OutArgument>
-                                                      </ui:AssignOperation.To>
-                                                      <ui:AssignOperation.Value>
-                                                        <InArgument x:TypeArguments="x:Object">
-                                                          <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_69">extension.ToString().Trim().Replace("\r\n", "").Replace("\n", "").Replace("\r", "")</mca:CSharpValue>
-                                                        </InArgument>
-                                                      </ui:AssignOperation.Value>
-                                                    </ui:AssignOperation>
-                                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
-                                                      <ui:AssignOperation.To>
-                                                        <OutArgument x:TypeArguments="x:String">
-                                                          <mca:CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_20">extensionArchivo</mca:CSharpReference>
-                                                        </OutArgument>
-                                                      </ui:AssignOperation.To>
-                                                      <ui:AssignOperation.Value>
-                                                        <InArgument x:TypeArguments="x:String">
-                                                          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_70">extensionArchivo.Trim().Replace("\r\n", "").Replace("\n", "").Replace("\r", "")</mca:CSharpValue>
-                                                        </InArgument>
-                                                      </ui:AssignOperation.Value>
-                                                    </ui:AssignOperation>
-                                                  </scg:List>
-                                                </ui:MultipleAssign.AssignOperations>
-                                                <sap:WorkflowViewStateService.ViewState>
-                                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                    <x:Boolean x:Key="IsPinned">True</x:Boolean>
-                                                  </scg:Dictionary>
-                                                </sap:WorkflowViewStateService.ViewState>
-                                              </ui:MultipleAssign>
-                                            </Sequence>
-                                          </ui:CommentOut.Body>
-                                        </ui:CommentOut>
-                                        <If DisplayName="Si" sap:VirtualizedContainerService.HintSize="671,717" sap2010:WorkflowViewState.IdRef="If_4">
+                                        <If DisplayName="Si" sap:VirtualizedContainerService.HintSize="721,1293" sap2010:WorkflowViewState.IdRef="If_4">
                                           <If.Condition>
                                             <InArgument x:TypeArguments="x:Boolean">
                                               <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_74">extension.ToString().Trim().Replace("\r\n", "").Replace("\n", "").Replace("\r", "") == extensionArchivo.Trim().Replace("\r\n", "").Replace("\n", "").Replace("\r", "")</mca:CSharpValue>
@@ -457,12 +560,14 @@
                                           <sap:WorkflowViewStateService.ViewState>
                                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                               <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                             </scg:Dictionary>
                                           </sap:WorkflowViewStateService.ViewState>
                                           <If.Then>
-                                            <Sequence DisplayName="Secuencia" sap:VirtualizedContainerService.HintSize="426,559" sap2010:WorkflowViewState.IdRef="Sequence_22">
+                                            <Sequence DisplayName="Secuencia" sap:VirtualizedContainerService.HintSize="476,1135" sap2010:WorkflowViewState.IdRef="Sequence_22">
                                               <Sequence.Variables>
                                                 <Variable x:TypeArguments="x:String" Name="nomNuevaCarpeta" />
+                                                <Variable x:TypeArguments="x:Object" Name="nuevoObjeto" />
                                               </Sequence.Variables>
                                               <sap:WorkflowViewStateService.ViewState>
                                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -470,25 +575,19 @@
                                                   <x:Boolean x:Key="IsPinned">True</x:Boolean>
                                                 </scg:Dictionary>
                                               </sap:WorkflowViewStateService.ViewState>
-                                              <ui:CommentOut DisplayName="Comentar" sap:VirtualizedContainerService.HintSize="384,51" sap2010:WorkflowViewState.IdRef="CommentOut_15">
-                                                <ui:CommentOut.Body>
-                                                  <Sequence DisplayName="Actividades ignoradas" sap2010:WorkflowViewState.IdRef="Sequence_24">
-                                                    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Bandeja de mensajes" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="MessageBox_12">
-                                                      <ui:MessageBox.Text>
-                                                        <InArgument x:TypeArguments="x:Object">
-                                                          <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_68">"Si " + extension+","+ extensionArchivo</mca:CSharpValue>
-                                                        </InArgument>
-                                                      </ui:MessageBox.Text>
-                                                      <sap:WorkflowViewStateService.ViewState>
-                                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                          <x:Boolean x:Key="IsPinned">True</x:Boolean>
-                                                        </scg:Dictionary>
-                                                      </sap:WorkflowViewStateService.ViewState>
-                                                    </ui:MessageBox>
-                                                  </Sequence>
-                                                </ui:CommentOut.Body>
-                                              </ui:CommentOut>
-                                              <Assign DisplayName="Asignar" sap:VirtualizedContainerService.HintSize="384,60" sap2010:WorkflowViewState.IdRef="Assign_8">
+                                              <Assign DisplayName="Asignar" sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="Assign_9">
+                                                <Assign.To>
+                                                  <OutArgument x:TypeArguments="x:Int32">
+                                                    <mca:CSharpReference x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="CSharpReference`1_23">archivosMovidos</mca:CSharpReference>
+                                                  </OutArgument>
+                                                </Assign.To>
+                                                <Assign.Value>
+                                                  <InArgument x:TypeArguments="x:Int32">
+                                                    <mca:CSharpValue x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="CSharpValue`1_88">archivosMovidos+1</mca:CSharpValue>
+                                                  </InArgument>
+                                                </Assign.Value>
+                                              </Assign>
+                                              <Assign DisplayName="Asignar" sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="Assign_8">
                                                 <Assign.To>
                                                   <OutArgument x:TypeArguments="x:String">
                                                     <mca:CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_21">nomNuevaCarpeta</mca:CSharpReference>
@@ -500,7 +599,7 @@
                                                   </InArgument>
                                                 </Assign.Value>
                                               </Assign>
-                                              <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Crear carpeta" sap:VirtualizedContainerService.HintSize="384,79" sap2010:WorkflowViewState.IdRef="CreateDirectory_4">
+                                              <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Crear carpeta" sap:VirtualizedContainerService.HintSize="434,51" sap2010:WorkflowViewState.IdRef="CreateDirectory_4">
                                                 <ui:CreateDirectory.Path>
                                                   <InArgument x:TypeArguments="x:String">
                                                     <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_73">nomNuevaCarpeta</mca:CSharpValue>
@@ -508,11 +607,11 @@
                                                 </ui:CreateDirectory.Path>
                                                 <sap:WorkflowViewStateService.ViewState>
                                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                    <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                                   </scg:Dictionary>
                                                 </sap:WorkflowViewStateService.ViewState>
                                               </ui:CreateDirectory>
-                                              <ui:MoveFile ContinueOnError="{x:Null}" DisplayName="Mover archivo" sap:VirtualizedContainerService.HintSize="384,157" sap2010:WorkflowViewState.IdRef="MoveFile_1" Overwrite="False">
+                                              <ui:MoveFile ContinueOnError="{x:Null}" DisplayName="Mover archivo" sap:VirtualizedContainerService.HintSize="434,157" sap2010:WorkflowViewState.IdRef="MoveFile_1" Overwrite="True">
                                                 <ui:MoveFile.Destination>
                                                   <InArgument x:TypeArguments="x:String">
                                                     <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_76">nomNuevaCarpeta</mca:CSharpValue>
@@ -526,27 +625,157 @@
                                                 <sap:WorkflowViewStateService.ViewState>
                                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                                     <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                                   </scg:Dictionary>
                                                 </sap:WorkflowViewStateService.ViewState>
                                               </ui:MoveFile>
+                                              <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Bitacora MoverArchivo" sap:VirtualizedContainerService.HintSize="434,555" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_2" InstanceCachePeriod="3000" WorkbookPath="reporte_200730448">
+                                                <ui:ExcelApplicationScope.Body>
+                                                  <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+                                                    <ActivityAction.Argument>
+                                                      <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+                                                    </ActivityAction.Argument>
+                                                    <Sequence DisplayName="Hacer" sap:VirtualizedContainerService.HintSize="376,406" sap2010:WorkflowViewState.IdRef="Sequence_28">
+                                                      <sap:WorkflowViewStateService.ViewState>
+                                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                          <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                                                        </scg:Dictionary>
+                                                      </sap:WorkflowViewStateService.ViewState>
+                                                      <Assign DisplayName="Asignar" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_12">
+                                                        <Assign.To>
+                                                          <OutArgument x:TypeArguments="x:Int32">
+                                                            <mca:CSharpReference x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="CSharpReference`1_29">celdaEscribir</mca:CSharpReference>
+                                                          </OutArgument>
+                                                        </Assign.To>
+                                                        <Assign.Value>
+                                                          <InArgument x:TypeArguments="x:Int32">
+                                                            <mca:CSharpValue x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="CSharpValue`1_100">celdaEscribir+1</mca:CSharpValue>
+                                                          </InArgument>
+                                                        </Assign.Value>
+                                                      </Assign>
+                                                      <ui:ExcelWriteCell DisplayName="Escribir celda" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_5" SheetName="Bitacora">
+                                                        <ui:ExcelWriteCell.Cell>
+                                                          <InArgument x:TypeArguments="x:String">
+                                                            <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_94">"A"+celdaEscribir.ToString()</mca:CSharpValue>
+                                                          </InArgument>
+                                                        </ui:ExcelWriteCell.Cell>
+                                                        <ui:ExcelWriteCell.Text>
+                                                          <InArgument x:TypeArguments="x:String">
+                                                            <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_110">(celdaEscribir-6).ToString()</mca:CSharpValue>
+                                                          </InArgument>
+                                                        </ui:ExcelWriteCell.Text>
+                                                        <sap:WorkflowViewStateService.ViewState>
+                                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                            <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                                                          </scg:Dictionary>
+                                                        </sap:WorkflowViewStateService.ViewState>
+                                                      </ui:ExcelWriteCell>
+                                                      <ui:ExcelWriteCell DisplayName="Escribir celda" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_6" SheetName="Bitacora">
+                                                        <ui:ExcelWriteCell.Cell>
+                                                          <InArgument x:TypeArguments="x:String">
+                                                            <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_102">"B"+celdaEscribir.ToString()</mca:CSharpValue>
+                                                          </InArgument>
+                                                        </ui:ExcelWriteCell.Cell>
+                                                        <ui:ExcelWriteCell.Text>
+                                                          <InArgument x:TypeArguments="x:String">
+                                                            <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_131">"Se analizo y se movió archivo \"" + archivo.ToString() + "\" a carpeta \"" + nomNuevaCarpeta.ToString()+ "\""</mca:CSharpValue>
+                                                          </InArgument>
+                                                        </ui:ExcelWriteCell.Text>
+                                                        <sap:WorkflowViewStateService.ViewState>
+                                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                            <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                                                          </scg:Dictionary>
+                                                        </sap:WorkflowViewStateService.ViewState>
+                                                      </ui:ExcelWriteCell>
+                                                    </Sequence>
+                                                  </ActivityAction>
+                                                </ui:ExcelApplicationScope.Body>
+                                                <sap:WorkflowViewStateService.ViewState>
+                                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                    <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                                                  </scg:Dictionary>
+                                                </sap:WorkflowViewStateService.ViewState>
+                                              </ui:ExcelApplicationScope>
                                             </Sequence>
                                           </If.Then>
                                           <If.Else>
-                                            <ui:CommentOut DisplayName="Comentar" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="CommentOut_16">
+                                            <ui:CommentOut DisplayName="Comentar" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="CommentOut_13">
                                               <ui:CommentOut.Body>
-                                                <Sequence DisplayName="Actividades ignoradas" sap2010:WorkflowViewState.IdRef="Sequence_25">
-                                                  <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Bandeja de mensajes" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="MessageBox_11">
-                                                    <ui:MessageBox.Text>
-                                                      <InArgument x:TypeArguments="x:Object">
-                                                        <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_67">"No " + extension+","+ extensionArchivo</mca:CSharpValue>
-                                                      </InArgument>
-                                                    </ui:MessageBox.Text>
+                                                <Sequence DisplayName="Actividades ignoradas" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_37">
+                                                  <sap:WorkflowViewStateService.ViewState>
+                                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                    </scg:Dictionary>
+                                                  </sap:WorkflowViewStateService.ViewState>
+                                                  <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Bitacora AnalizarArchivo" sap:VirtualizedContainerService.HintSize="434,555" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_8" InstanceCachePeriod="3000" WorkbookPath="reporte_200730448">
+                                                    <ui:ExcelApplicationScope.Body>
+                                                      <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+                                                        <ActivityAction.Argument>
+                                                          <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+                                                        </ActivityAction.Argument>
+                                                        <Sequence DisplayName="Hacer" sap:VirtualizedContainerService.HintSize="376,406" sap2010:WorkflowViewState.IdRef="Sequence_35">
+                                                          <sap:WorkflowViewStateService.ViewState>
+                                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                              <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                                                            </scg:Dictionary>
+                                                          </sap:WorkflowViewStateService.ViewState>
+                                                          <Assign DisplayName="Asignar" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_16">
+                                                            <Assign.To>
+                                                              <OutArgument x:TypeArguments="x:Int32">
+                                                                <mca:CSharpReference x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="CSharpReference`1_33">celdaEscribir</mca:CSharpReference>
+                                                              </OutArgument>
+                                                            </Assign.To>
+                                                            <Assign.Value>
+                                                              <InArgument x:TypeArguments="x:Int32">
+                                                                <mca:CSharpValue x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="CSharpValue`1_122">celdaEscribir+1</mca:CSharpValue>
+                                                              </InArgument>
+                                                            </Assign.Value>
+                                                          </Assign>
+                                                          <ui:ExcelWriteCell DisplayName="Escribir celda" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_13" SheetName="Bitacora">
+                                                            <ui:ExcelWriteCell.Cell>
+                                                              <InArgument x:TypeArguments="x:String">
+                                                                <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_123">"A"+celdaEscribir.ToString()</mca:CSharpValue>
+                                                              </InArgument>
+                                                            </ui:ExcelWriteCell.Cell>
+                                                            <ui:ExcelWriteCell.Text>
+                                                              <InArgument x:TypeArguments="x:String">
+                                                                <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_124">(celdaEscribir-6).ToString()</mca:CSharpValue>
+                                                              </InArgument>
+                                                            </ui:ExcelWriteCell.Text>
+                                                            <sap:WorkflowViewStateService.ViewState>
+                                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                                                              </scg:Dictionary>
+                                                            </sap:WorkflowViewStateService.ViewState>
+                                                          </ui:ExcelWriteCell>
+                                                          <ui:ExcelWriteCell DisplayName="Escribir celda" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_14" SheetName="Bitacora">
+                                                            <ui:ExcelWriteCell.Cell>
+                                                              <InArgument x:TypeArguments="x:String">
+                                                                <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_125">"B"+celdaEscribir.ToString()</mca:CSharpValue>
+                                                              </InArgument>
+                                                            </ui:ExcelWriteCell.Cell>
+                                                            <ui:ExcelWriteCell.Text>
+                                                              <InArgument x:TypeArguments="x:String">
+                                                                <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_126">"Se analizó el archivo "+ archivo.ToString()</mca:CSharpValue>
+                                                              </InArgument>
+                                                            </ui:ExcelWriteCell.Text>
+                                                            <sap:WorkflowViewStateService.ViewState>
+                                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                                                              </scg:Dictionary>
+                                                            </sap:WorkflowViewStateService.ViewState>
+                                                          </ui:ExcelWriteCell>
+                                                        </Sequence>
+                                                      </ActivityAction>
+                                                    </ui:ExcelApplicationScope.Body>
                                                     <sap:WorkflowViewStateService.ViewState>
                                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                                         <x:Boolean x:Key="IsPinned">True</x:Boolean>
                                                       </scg:Dictionary>
                                                     </sap:WorkflowViewStateService.ViewState>
-                                                  </ui:MessageBox>
+                                                  </ui:ExcelApplicationScope>
                                                 </Sequence>
                                               </ui:CommentOut.Body>
                                             </ui:CommentOut>
@@ -581,61 +810,117 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                         </ui:ForEach>
-                        <If DisplayName="Si" sap:VirtualizedContainerService.HintSize="735,218" sap2010:WorkflowViewState.IdRef="If_3">
-                          <If.Condition>
-                            <InArgument x:TypeArguments="x:Boolean">
-                              <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_34">contArchivosCarpeta != 0</mca:CSharpValue>
-                            </InArgument>
-                          </If.Condition>
-                          <sap:WorkflowViewStateService.ViewState>
-                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <x:Boolean x:Key="IsPinned">True</x:Boolean>
-                            </scg:Dictionary>
-                          </sap:WorkflowViewStateService.ViewState>
-                          <If.Then>
-                            <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Bandeja de mensajes" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="MessageBox_7">
-                              <ui:MessageBox.Text>
-                                <InArgument x:TypeArguments="x:Object">
-                                  <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_33">"La carpeta tiene " + contArchivosCarpeta + " archivos"</mca:CSharpValue>
-                                </InArgument>
-                              </ui:MessageBox.Text>
-                              <sap:WorkflowViewStateService.ViewState>
-                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                  <x:Boolean x:Key="IsPinned">True</x:Boolean>
-                                </scg:Dictionary>
-                              </sap:WorkflowViewStateService.ViewState>
-                            </ui:MessageBox>
-                          </If.Then>
-                          <If.Else>
-                            <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Bandeja de mensajes" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="MessageBox_8">
-                              <ui:MessageBox.Text>
-                                <InArgument x:TypeArguments="x:Object">
-                                  <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_36">"La carpeta "+ruta+" no tiene archivos"</mca:CSharpValue>
-                                </InArgument>
-                              </ui:MessageBox.Text>
-                              <sap:WorkflowViewStateService.ViewState>
-                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                </scg:Dictionary>
-                              </sap:WorkflowViewStateService.ViewState>
-                            </ui:MessageBox>
-                          </If.Else>
-                        </If>
+                        <ui:CommentOut DisplayName="Comentar" sap:VirtualizedContainerService.HintSize="877,51" sap2010:WorkflowViewState.IdRef="CommentOut_9">
+                          <ui:CommentOut.Body>
+                            <Sequence DisplayName="Actividades ignoradas" sap2010:WorkflowViewState.IdRef="Sequence_24">
+                              <If DisplayName="Si" sap:VirtualizedContainerService.HintSize="640,328" sap2010:WorkflowViewState.IdRef="If_3">
+                                <If.Condition>
+                                  <InArgument x:TypeArguments="x:Boolean">
+                                    <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_85">contArchivosCarpeta == 0</mca:CSharpValue>
+                                  </InArgument>
+                                </If.Condition>
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <If.Then>
+                                  <Sequence DisplayName="Secuencia" sap:VirtualizedContainerService.HintSize="376,151" sap2010:WorkflowViewState.IdRef="Sequence_23">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Bandeja de mensajes" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="MessageBox_8">
+                                      <ui:MessageBox.Text>
+                                        <InArgument x:TypeArguments="x:Object">
+                                          <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_36">"La carpeta "+ruta+" no tiene archivos"</mca:CSharpValue>
+                                        </InArgument>
+                                      </ui:MessageBox.Text>
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                    </ui:MessageBox>
+                                  </Sequence>
+                                </If.Then>
+                              </If>
+                            </Sequence>
+                          </ui:CommentOut.Body>
+                        </ui:CommentOut>
                       </Sequence>
                     </If.Then>
                     <If.Else>
-                      <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Bandeja de mensajes" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="MessageBox_4">
-                        <ui:MessageBox.Text>
-                          <InArgument x:TypeArguments="x:Object">
-                            <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_27">"Carpeta no existe " + ruta</mca:CSharpValue>
-                          </InArgument>
-                        </ui:MessageBox.Text>
+                      <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Bitacora CarpetaNoExiste" sap:VirtualizedContainerService.HintSize="434,555" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_6" InstanceCachePeriod="3000" WorkbookPath="reporte_200730448">
+                        <ui:ExcelApplicationScope.Body>
+                          <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+                            <ActivityAction.Argument>
+                              <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+                            </ActivityAction.Argument>
+                            <Sequence DisplayName="Hacer" sap:VirtualizedContainerService.HintSize="376,406" sap2010:WorkflowViewState.IdRef="Sequence_33">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <Assign DisplayName="Asignar" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_14">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:Int32">
+                                    <mca:CSharpReference x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="CSharpReference`1_31">celdaEscribir</mca:CSharpReference>
+                                  </OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:Int32">
+                                    <mca:CSharpValue x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="CSharpValue`1_111">celdaEscribir+1</mca:CSharpValue>
+                                  </InArgument>
+                                </Assign.Value>
+                              </Assign>
+                              <ui:ExcelWriteCell DisplayName="Escribir celda" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_9" SheetName="Bitacora">
+                                <ui:ExcelWriteCell.Cell>
+                                  <InArgument x:TypeArguments="x:String">
+                                    <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_112">"A"+celdaEscribir.ToString()</mca:CSharpValue>
+                                  </InArgument>
+                                </ui:ExcelWriteCell.Cell>
+                                <ui:ExcelWriteCell.Text>
+                                  <InArgument x:TypeArguments="x:String">
+                                    <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_113">(celdaEscribir-6).ToString()</mca:CSharpValue>
+                                  </InArgument>
+                                </ui:ExcelWriteCell.Text>
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                              </ui:ExcelWriteCell>
+                              <ui:ExcelWriteCell DisplayName="Escribir celda" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_10" SheetName="Bitacora">
+                                <ui:ExcelWriteCell.Cell>
+                                  <InArgument x:TypeArguments="x:String">
+                                    <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_114">"B"+celdaEscribir.ToString()</mca:CSharpValue>
+                                  </InArgument>
+                                </ui:ExcelWriteCell.Cell>
+                                <ui:ExcelWriteCell.Text>
+                                  <InArgument x:TypeArguments="x:String">
+                                    <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_142">"Carpeta no existe \"" + ruta.ToString() + "\""</mca:CSharpValue>
+                                  </InArgument>
+                                </ui:ExcelWriteCell.Text>
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                              </ui:ExcelWriteCell>
+                            </Sequence>
+                          </ActivityAction>
+                        </ui:ExcelApplicationScope.Body>
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                      </ui:MessageBox>
+                      </ui:ExcelApplicationScope>
                     </If.Else>
                   </If>
                 </Sequence>
@@ -649,22 +934,93 @@
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:ForEach>
-          <ui:CommentOut DisplayName="Comentar" sap:VirtualizedContainerService.HintSize="944,51" sap2010:WorkflowViewState.IdRef="CommentOut_8">
-            <ui:CommentOut.Body>
-              <Sequence DisplayName="Actividades ignoradas" sap2010:WorkflowViewState.IdRef="Sequence_14">
-                <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Bandeja de mensajes" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="MessageBox_1">
-                  <ui:MessageBox.Text>
-                    <InArgument x:TypeArguments="x:Object">
-                      <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_15">"rutas" + listadoPDF[0] +" extensiones" + listadoPDF[1]</mca:CSharpValue>
-                    </InArgument>
-                  </ui:MessageBox.Text>
-                </ui:MessageBox>
-              </Sequence>
-            </ui:CommentOut.Body>
-          </ui:CommentOut>
+          <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Bandeja de mensajes" sap:VirtualizedContainerService.HintSize="1476,59" sap2010:WorkflowViewState.IdRef="MessageBox_9">
+            <ui:MessageBox.Text>
+              <InArgument x:TypeArguments="x:Object">
+                <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_127">"Fueron movidos " + archivosMovidos.ToString() + " archivos!"</mca:CSharpValue>
+              </InArgument>
+            </ui:MessageBox.Text>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsPinned">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:MessageBox>
+          <Assign DisplayName="Asignar" sap:VirtualizedContainerService.HintSize="1476,60" sap2010:WorkflowViewState.IdRef="Assign_19">
+            <Assign.To>
+              <OutArgument x:TypeArguments="s:DateTime">
+                <mca:CSharpReference x:TypeArguments="s:DateTime" sap2010:WorkflowViewState.IdRef="CSharpReference`1_37">HoraFin</mca:CSharpReference>
+              </OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="s:DateTime">
+                <mca:CSharpValue x:TypeArguments="s:DateTime" sap2010:WorkflowViewState.IdRef="CSharpValue`1_136">DateTime.Now</mca:CSharpValue>
+              </InArgument>
+            </Assign.Value>
+          </Assign>
+          <Assign DisplayName="Asignar" sap:VirtualizedContainerService.HintSize="1476,60" sap2010:WorkflowViewState.IdRef="Assign_20">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Int32">
+                <mca:CSharpReference x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="CSharpReference`1_39">segundos</mca:CSharpReference>
+              </OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Int32">
+                <mca:CSharpValue x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="CSharpValue`1_145">(HoraFin - HoraInicio).Seconds</mca:CSharpValue>
+              </InArgument>
+            </Assign.Value>
+          </Assign>
+          <Assign DisplayName="Asignar" sap:VirtualizedContainerService.HintSize="1476,64" sap2010:WorkflowViewState.IdRef="Assign_17">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">
+                <mca:CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_35">cuerpoCorreo</mca:CSharpReference>
+              </OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">
+                <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_146" xml:space="preserve">"Archivos movidos: " + archivosMovidos.ToString() + "\n\n" +
+//"Duración de la automatización (seg): " + String.Format("{0} segundos ", segundos.Seconds) + "\n\n" +
+"Duración de la automatización (seg): " + segundos.ToString() +"\n\n" +
+"Fecha y Hora Inicial Automatización: " + HoraInicio.ToString() + "\n\n" +
+"Fecha y Hora Fin Automatización: " + HoraFin.ToString() + "\n\n"</mca:CSharpValue>
+              </InArgument>
+            </Assign.Value>
+          </Assign>
+          <ui:GetPassword DisplayName="Obtener contraseña" sap:VirtualizedContainerService.HintSize="1476,22" sap2010:WorkflowViewState.IdRef="GetPassword_1" ProtectedPassword="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAZsHDust3Mk2hMynRG9RPrQAAAAACAAAAAAAQZgAAAAEAACAAAACA8lP0l5Z1Vk1uI1d/l7hNtaUP+hZfOoNRYYERWtN6zgAAAAAOgAAAAAIAACAAAABWxSQendGQ9RoRyJf/ySN9ZDg91V4YZ6B8jWp1L3HlBhAAAADMLfIRRfwm4815lDHgEb42QAAAAEiHJf8ECMldMJ3ol+S2XQTNFleBPCGIpTjGo1V6BSZRJBVvJq6Kx8/XRlUTkEQeP2jQP7bLQFmKtfdvWSUwIpY=">
+            <ui:GetPassword.Result>
+              <OutArgument x:TypeArguments="x:String">
+                <mca:CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_34">pwd</mca:CSharpReference>
+              </OutArgument>
+            </ui:GetPassword.Result>
+          </ui:GetPassword>
+          <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" ReplyTo="{x:Null}" SecurePassword="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Enviar mensaje de correo SMTP" Email="josevelasquez3064@gmail.com" EnableSSL="True" sap:VirtualizedContainerService.HintSize="1476,145" sap2010:WorkflowViewState.IdRef="SendMail_1" IsBodyHtml="False" Port="587" SecureConnection="Auto" Server="smtp.gmail.com" Subject="Automatización 200730448 Finalizada!" To="josevelasquez3064@gmail.com">
+            <ui:SendMail.Body>
+              <InArgument x:TypeArguments="x:String">
+                <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_134">cuerpoCorreo</mca:CSharpValue>
+              </InArgument>
+            </ui:SendMail.Body>
+            <ui:SendMail.Files>
+              <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
+                <InArgument x:TypeArguments="x:String">
+                  <Literal x:TypeArguments="x:String">reporte_200730448.xlsx</Literal>
+                </InArgument>
+              </scg:List>
+            </ui:SendMail.Files>
+            <ui:SendMail.Password>
+              <InArgument x:TypeArguments="x:String">
+                <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_133">pwd</mca:CSharpValue>
+              </InArgument>
+            </ui:SendMail.Password>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsPinned">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:SendMail>
         </Sequence>
       </If.Then>
       <If.Else>
